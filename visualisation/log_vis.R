@@ -11,6 +11,7 @@ for (item in 2:nrow(dfUK)) {
 
 ggplot(data = dfUK, aes(x = dfUK$confirmed, y = dfUK$newConfirmed, color = "UK")) +
   geom_line()+
+  geom_point(data = dfUK[c(nrow(dfUK)),c(1:length(dfUK))], aes(x = confirmed, y = newConfirmed), size = 2)+
   stat_smooth(geom='line', alpha=0.6, se=FALSE, size = 1.5)+
   geom_abline(aes(slope = 1, intercept = 0, color = "Unlimited growth"), show.legend = T, size = 2)+
   xlab("Total confirmed")+
