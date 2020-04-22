@@ -1,2 +1,4 @@
 # Covid19predict
-The prediction of Covid-19
+
+## Current UK trend
+![uk figure](visualisation/UKlogTrend.png)
