@@ -1,4 +1,4 @@
-setwd("~/Documents/GitHub/Covid19predict/visualisation")
+# setwd("~/Documents/GitHub/Covid19predict/visualisation")
 library(ggplot2)
 library(scales)
 
