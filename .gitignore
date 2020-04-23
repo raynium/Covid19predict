@@ -5,3 +5,6 @@ daraPreProcess/.idea
 daraPreProcess/json2data.py
 visualisation/.RData
 visualisation/.Rhistory
+data/data.xlsx
+.RData
+.Rhistory

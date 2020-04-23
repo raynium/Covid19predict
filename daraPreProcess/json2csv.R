@@ -1,4 +1,4 @@
-# setwd("~/Documents/GitHub/Covid19predict/daraPreProcess")
+# setwd("Covid19predict")
 
 library(rjson)
 library (plyr)
@@ -16,4 +16,4 @@ for (item in 1:length(hisData)) {
 dfData = as.data.frame( Reduce(rbind, hisData))
 colnames(dfData) = names(readData[["data"]][[1]])
 rownames(dfData) = NULL
-write.csv(dfData, file = "historyfigures.csv", row.names = F, quote = F)
+write.csv(dfData, file = "data/UK_data.csv", row.names = F, quote = F)
