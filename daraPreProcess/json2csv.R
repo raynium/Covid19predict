@@ -1,4 +1,4 @@
-setwd("~/Documents/GitHub/Covid19predict/daraPreProcess")
+# setwd("~/Documents/GitHub/Covid19predict/daraPreProcess")
 
 library(rjson)
 library (plyr)
