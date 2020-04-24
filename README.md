@@ -5,6 +5,9 @@
 
 ![uk figure](plot/UKlogTrend.png)
 
+Compare trends:
+[Log trend comparison](./trendFigures.html).
+
 Data Sources: 
 - [JHU CSSE Data Repository](https://github.com/CSSEGISandData/COVID-19)
 - [中华人民共和国国家卫生健康委员会](http://www.nhc.gov.cn/xcs/yqtb/list_gzbd.shtml)
