@@ -1,18 +1,18 @@
 
 [![lifecycle](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental) [![License: MIT](https://img.shields.io/github/license/r-lib/ghactions.svg?style=flat)](https://opensource.org/licenses/MIT)
-## Daily cases
+# Daily cases
 ![daily figure](plot/DailyIncrease.png)
 
-## ARIMA Prediction
+# ARIMA Prediction
 
 ![amari figure](prediction/ARIMAtotal.png)
+![amari compare figure](prediction/compare.png)
 
-
-### Log trend
+## Log trend
 ![uk figure](prediction/UKlogTrend.png)
 
 Compare trends:
-[Log trend comparison](./trendFigures.html).
+[Log trend comparison](./trendFigures.html)
 
 Data Sources: 
 - [JHU CSSE Data Repository](https://github.com/CSSEGISandData/COVID-19)
