@@ -16,6 +16,17 @@ for (item in 1:length(hisData)) {
 dfData = as.data.frame( Reduce(rbind, hisData))
 colnames(dfData) = names(readData[["data"]][[1]])
 rownames(dfData) = NULL
+dfData$confirmed  =as.numeric(as.character(dfData$confirmed))
+dfData$newConfirmed = 0
+for (item in 2:nrow(dfData)) {
+  dfData$newConfirmed[item] = dfData$confirmed[item] - dfData$confirmed[item-1]
+}
+
+dfData$death = as.numeric(as.character(dfData$death))
+dfData$newDeath = 0
+for (item in 2:nrow(dfData)) {
+  dfData$newDeath[item] = dfData$death[item] - dfData$death[item-1]
+}
 write.csv(dfData, file = "data/UK_data.csv", row.names = F, quote = F)
 
 

@@ -6,15 +6,6 @@ library(data.table)
 
 # Read UK data
 dfUK = read.csv("data/UK_data.csv", header = T)
-dfUK$newConfirmed = 0
-for (item in 2:nrow(dfUK)) {
-  dfUK$newConfirmed[item] = dfUK$confirmed[item] - dfUK$confirmed[item-1]
-}
-
-dfUK$newDeath = 0
-for (item in 2:nrow(dfUK)) {
-  dfUK$newDeath[item] = dfUK$death[item] - dfUK$death[item-1]
-}
 
 # Read EU data
 dfEUData = read.csv("data/EU_confirmed.csv")
