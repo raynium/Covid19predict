@@ -4,6 +4,7 @@
 ![dev](https://img.shields.io/badge/developer-Chaolin%20Han-brightgreen)
 
 ![uk figure](plot/UKlogTrend.png)
+![daily figure](plot/DailyIncrease.png)
 
 Compare trends:
 [Log trend comparison](./trendFigures.html).
