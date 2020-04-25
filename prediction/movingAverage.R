@@ -9,7 +9,7 @@ library(ggpubr)
 dfUK = read.csv("data/UK_data.csv", header = T)
 dfUK = dfUK[c(1:nrow(dfUK)), c(1,3,4,15,16)]
 
-arima.order = c(3, 3, 4)
+arima.order = c(3, 2, 4)
 
 UK.arima = arima(dfUK$confirmed, order = arima.order)
 summary(UK.arima)
@@ -26,7 +26,7 @@ for (item in 2:nrow(dfUK)) {
 }
 
 
-subData = dfUK[c((nrow(dfUK)-90):nrow(dfUK)),]
+subData = dfUK[c((nrow(dfUK)-75):nrow(dfUK))-15,]
 
 # Plot total prediction
 plotT1 = ggplot(data = subData, aes(x = as.integer(id), y = pred, color = "Predict"))+
@@ -36,6 +36,7 @@ plotT1 = ggplot(data = subData, aes(x = as.integer(id), y = pred, color = "Predi
   labs(color = "")+
   ylab("Total Confirmed")+
   theme_minimal()+
+  scale_y_continuous(labels=function(x) format(x, big.mark = ",", scientific = FALSE))+
   theme(legend.key.size =  unit(2, "mm"),
         legend.position="bottom")
 
@@ -75,10 +76,10 @@ plotC1 = ggplot(data = subData, aes(x = as.factor(id), y = value, color = variab
   ylab("Total Confirmed")+
   theme_minimal()+
   labs(fill = "",color = "")+
-  scale_y_continuous(limits = c(0,200000), expand = c(0, 2000))+
+  scale_y_continuous(limits = c(0,max(subData$value, na.rm = T)+20000), expand = c(0, 2000))+
   scale_fill_hue(c=60, h = c(20,220))
-
-ggsave("prediction/Compare.png", scale = 4, width = 9, height = 5, units = "cm", dpi = "retina")
+plotC1
+ggsave("prediction/Bar.png", scale = 2.5, width = 10, height = 4, units = "cm", dpi = "retina")
 
 
 # Compare last 5 days
@@ -97,6 +98,8 @@ colnames(dfRecent) = c("Real","Prediction")
 dfRecent$id = dfUK$id[(nrow(dfUK)-4):nrow(dfUK)]
 dfRecent$Error = abs(dfRecent$Real-dfRecent$Prediction)/(dfRecent$Real)
 
+sum(dfRecent$Error)
+
 plotE1 = ggplot(data = dfRecent, aes(x = as.integer(id), y = Error))+
   geom_col()+
   geom_label(aes(label = as.integer(abs(dfRecent$Real-dfRecent$Prediction))),vjust = -0.2, fontface = "bold", show.legend = FALSE)+
@@ -109,7 +112,7 @@ sum(dfRecent$Error)
 ggsave("prediction/Error.png", scale = 3, width = 5, height = 5, units = "cm", dpi = "retina")
 
 
-ggarrange(plotC1,plotE1, widths = c(0.8,0.4))
+ggarrange(plotT1,plotE1, widths = c(0.8,0.4))
 
-ggsave("prediction/Compare.png", scale = 4, width = 10, height = 5, units = "cm", dpi = "retina")
+ggsave("prediction/Compare.png", scale = 2.5, width = 10, height = 4, units = "cm", dpi = "retina")
 

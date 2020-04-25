@@ -11,8 +11,8 @@
 
 # ARIMA Prediction
 
-![amari figure](prediction/ARIMAtotal.png)
-![amari compare figure](prediction/compare.png)
+![amari figure](prediction/compare.png)
+![amari compare figure](prediction/Bar.png)
 
 ## Log trend and elbow point
 ![uk figure](prediction/UKlogTrend.png)

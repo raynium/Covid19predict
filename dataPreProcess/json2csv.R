@@ -2,6 +2,7 @@
 
 library(rjson)
 library (plyr)
+library(data.table)
 library(reshape2) # library for reshaping data (tall-narrow <-> short-wide)
 library(deSolve) # library for solving differential equations
 json_file = "https://api.covid19uk.live/historyfigures"
