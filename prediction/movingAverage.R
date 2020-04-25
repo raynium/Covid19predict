@@ -9,7 +9,9 @@ library(ggpubr)
 dfUK = read.csv("data/UK_data.csv", header = T)
 dfUK = dfUK[c(1:nrow(dfUK)), c(1,3,4,15,16)]
 
-UK.arima = arima(dfUK$confirmed, order = c(3, 3, 3))
+arima.order = c(4, 3, 4)
+
+UK.arima = arima(dfUK$confirmed, order = arima.order)
 summary(UK.arima)
 pred<-predict(UK.arima,n.ahead=30)
 pred = as.data.frame(pred)
@@ -82,7 +84,7 @@ ggsave("prediction/Compare.png", scale = 4, width = 9, height = 5, units = "cm",
 # Compare last 5 days
 dfUK = read.csv("data/UK_data.csv", header = T)
 dfUK = dfUK[c(1:nrow(dfUK)), c(1,3,4,15,16)]
-UK.arima.recent = arima(dfUK$confirmed[1:(nrow(dfUK)-5)], order = c(3, 3, 3))
+UK.arima.recent = arima(dfUK$confirmed[1:(nrow(dfUK)-5)], order = arima.order)
 
 pred.recent<-predict(UK.arima.recent, n.ahead=5)
 pred.recent = as.data.frame(pred.recent)
@@ -109,3 +111,4 @@ ggsave("prediction/Error.png", scale = 3, width = 5, height = 5, units = "cm", d
 ggarrange(plotC1,plotE1, widths = c(0.8,0.4))
 
 ggsave("prediction/Compare.png", scale = 4, width = 10, height = 5, units = "cm", dpi = "retina")
+
