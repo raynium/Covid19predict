@@ -1,6 +1,12 @@
 
 [![lifecycle](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental) [![License: MIT](https://img.shields.io/github/license/r-lib/ghactions.svg?style=flat)](https://opensource.org/licenses/MIT)
-# Daily cases
+
+# Cases
+
+| Confirmed| Death| Cured| Serious| England| Scotland| Wales| N.Ireland|
+|---------:|-----:|-----:|-------:|-------:|--------:|-----:|----------------:|
+|    148377| 20319|     0|       0|  108051|    10051|  8900|             3226|
+
 ![daily figure](plot/DailyIncrease.png)
 
 # ARIMA Prediction

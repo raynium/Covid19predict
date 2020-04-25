@@ -2,7 +2,6 @@
 
 library(rjson)
 library (plyr)
-
 library(reshape2) # library for reshaping data (tall-narrow <-> short-wide)
 library(deSolve) # library for solving differential equations
 json_file = "https://api.covid19uk.live/historyfigures"
@@ -47,3 +46,14 @@ for (item in 2:nrow(dfEUData)) {
 }
 
 write.csv(dfEUData, file = "data/EU_confirmed.csv", row.names = F, quote = F)
+
+
+# Read curret data
+json_file = "https://api.covid19uk.live/"
+readData =  fromJSON(paste(readLines(json_file), collapse="", simplify=TRUE))
+dfCurrent = readData[["data"]][[1]]
+dfCurrent = as.data.frame(dfCurrent[5:16])
+dfCurrent = dfCurrent[c(1:4,9:12)]
+colnames(dfCurrent) = c("Confirmed", "Death", "Cured", "Serious", "England", "Scotland", "Wales", "Northern Ireland")
+
+knitr::kable(head(dfCurrent))
