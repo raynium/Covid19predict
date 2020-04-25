@@ -9,7 +9,7 @@ library(ggpubr)
 dfUK = read.csv("data/UK_data.csv", header = T)
 dfUK = dfUK[c(1:nrow(dfUK)), c(1,3,4,15,16)]
 
-arima.order = c(4, 3, 4)
+arima.order = c(3, 3, 4)
 
 UK.arima = arima(dfUK$confirmed, order = arima.order)
 summary(UK.arima)
@@ -103,8 +103,9 @@ plotE1 = ggplot(data = dfRecent, aes(x = as.integer(id), y = Error))+
   xlab("Days")+
   ylab("Relative Error in past 5 days")+
   theme_minimal()+
-  scale_y_continuous(limits = c(0,0.010), expand = c(0,0),labels = scales::percent)
-
+  scale_y_continuous(limits = c(0,max(dfRecent$Error)+0.003), expand = c(0,0),labels = scales::percent)
+plotE1
+sum(dfRecent$Error)
 ggsave("prediction/Error.png", scale = 3, width = 5, height = 5, units = "cm", dpi = "retina")
 
 
