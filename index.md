@@ -8,11 +8,24 @@
 ![amari figure](prediction/ARIMAtotal.png)
 ![amari compare figure](prediction/compare.png)
 
-## Log trend
+## Log trend and elbow point
 ![uk figure](prediction/UKlogTrend.png)
 
-Compare trends:
-[Log trend comparison](./trendFigures.html)
+Compare trend with success case (🇨🇳, 🇰🇷) and EU countries:
+
+- [Log trend comparison](./trendFigures.html)
+
+More about axis and interpretation of Log trend: 
+
+- [How To Tell If We're Beating COVID-19](https://youtu.be/54XLXg4fYsc)
+
+# Current
+
+## New death 
+![death](plot/DeathIncrease.png)
+
+## UK and EU Log trend
+![UK trend](plot/UKlogTrend.png)
 
 Data Sources: 
 - [JHU CSSE Data Repository](https://github.com/CSSEGISandData/COVID-19)
