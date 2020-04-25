@@ -101,7 +101,7 @@ plotE1 = ggplot(data = dfRecent, aes(x = as.integer(id), y = Error))+
   xlab("Days")+
   ylab("Relative Error in past 5 days")+
   theme_minimal()+
-  scale_y_continuous(limits = c(0,0.007), expand = c(0,0),labels = scales::percent)
+  scale_y_continuous(limits = c(0,0.010), expand = c(0,0),labels = scales::percent)
 
 ggsave("prediction/Error.png", scale = 3, width = 5, height = 5, units = "cm", dpi = "retina")
 
