@@ -55,6 +55,6 @@ readData =  fromJSON(paste(readLines(json_file), collapse="", simplify=TRUE))
 dfCurrent = readData[["data"]][[1]]
 dfCurrent = as.data.frame(dfCurrent[5:16])
 dfCurrent = dfCurrent[c(1:4,9:12)]
-colnames(dfCurrent) = c("Confirmed", "Death", "Cured", "Serious", "England", "Scotland", "Wales", "Northern Ireland")
+colnames(dfCurrent) = c("Confirmed", "Death", "Cured", "Serious", "England", "Scotland", "Wales", "N.Ireland")
 
 knitr::kable(head(dfCurrent))

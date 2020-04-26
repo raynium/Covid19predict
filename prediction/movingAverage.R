@@ -6,10 +6,46 @@ library(reshape2)
 library(data.table)
 library(ggpubr)
 
+
+# Compare last 7 days
 dfUK = read.csv("data/UK_data.csv", header = T)
 dfUK = dfUK[c(1:nrow(dfUK)), c(1,3,4,15,16)]
 
-arima.order = c(3, 2, 4)
+gridSearch = list(c(i=0,j=0,k=0,sum = 0))
+cnt = 1
+for (i in 2:4){
+  for (j in 2:4){
+    for (k in 1:6){
+      arima.order = c(i, j, k)
+      #print(c(i,j,k))
+      UK.arima.recent = arima(dfUK$confirmed[1:(nrow(dfUK)-7)], order = arima.order)
+      pred.recent<-predict(UK.arima.recent, n.ahead=7)
+      pred.recent = as.data.frame(pred.recent)
+      
+      dfRecent = as.data.frame( dfUK$confirmed[(nrow(dfUK)-6):nrow(dfUK)])
+      dfRecent$Prediction = pred.recent$pred
+      colnames(dfRecent) = c("Real","Prediction")
+      dfRecent$id = dfUK$id[(nrow(dfUK)-6):nrow(dfUK)]
+      dfRecent$Error = (dfRecent$Real-dfRecent$Prediction)^2
+      gridSearch[[cnt]] = c(i,j,k,sum = sum(dfRecent$Error))
+      cnt = cnt+1
+      #print(i,j,k,sum(dfRecent$Error)) 
+    }
+  }
+}
+
+gridSearch = as.data.frame(transpose(gridSearch))
+colnames(gridSearch) = c("i", "j","k","sum")
+plot(gridSearch$i*100+gridSearch$j*20+gridSearch$k, gridSearch$sum)
+bestGrid = gridSearch[which.min(gridSearch$sum),]
+bestGrid$sum = as.integer(bestGrid$sum)
+
+# Use the best grid to predict
+
+dfUK = read.csv("data/UK_data.csv", header = T)
+dfUK = dfUK[c(1:nrow(dfUK)), c(1,3,4,15,16)]
+
+arima.order = c(bestGrid$i, bestGrid$j, bestGrid$k)
 
 UK.arima = arima(dfUK$confirmed, order = arima.order)
 summary(UK.arima)
@@ -35,6 +71,8 @@ plotT1 = ggplot(data = subData, aes(x = as.integer(id), y = pred, color = "Predi
   xlab("Days")+
   labs(color = "")+
   ylab("Total Confirmed")+
+  annotate("text", label = "p, d, q, SSE (Grid BEST)", x = 60, y = 210000, size = 3, hjust = 0, colour = "black", family = "mono", show.legend = FALSE)+
+  annotate("text", label = toString(bestGrid), x = 60, y = 200000, size = 3, hjust = 0, colour = "black", family = "mono", show.legend = FALSE)+
   theme_minimal()+
   scale_y_continuous(labels=function(x) format(x, big.mark = ",", scientific = FALSE))+
   theme(legend.key.size =  unit(2, "mm"),
@@ -81,34 +119,29 @@ plotC1 = ggplot(data = subData, aes(x = as.factor(id), y = value, color = variab
 plotC1
 ggsave("prediction/Bar.png", scale = 2.5, width = 10, height = 4, units = "cm", dpi = "retina")
 
-
-# Compare last 5 days
+# Compare last days
 dfUK = read.csv("data/UK_data.csv", header = T)
 dfUK = dfUK[c(1:nrow(dfUK)), c(1,3,4,15,16)]
-UK.arima.recent = arima(dfUK$confirmed[1:(nrow(dfUK)-5)], order = arima.order)
-
-pred.recent<-predict(UK.arima.recent, n.ahead=5)
+arima.order = c(bestGrid$i, bestGrid$j, bestGrid$k)
+UK.arima.recent = arima(dfUK$confirmed[1:(nrow(dfUK)-7)], order = arima.order)
+pred.recent<-predict(UK.arima.recent, n.ahead=7)
 pred.recent = as.data.frame(pred.recent)
-pred.recent$pred
-dfUK$confirmed[(nrow(dfUK)-4):nrow(dfUK)]
 
-dfRecent = as.data.frame( dfUK$confirmed[(nrow(dfUK)-4):nrow(dfUK)])
+dfRecent = as.data.frame( dfUK$confirmed[(nrow(dfUK)-6):nrow(dfUK)])
 dfRecent$Prediction = pred.recent$pred
 colnames(dfRecent) = c("Real","Prediction")
-dfRecent$id = dfUK$id[(nrow(dfUK)-4):nrow(dfUK)]
+dfRecent$id = dfUK$id[(nrow(dfUK)-6):nrow(dfUK)]
 dfRecent$Error = abs(dfRecent$Real-dfRecent$Prediction)/(dfRecent$Real)
-
 sum(dfRecent$Error)
 
 plotE1 = ggplot(data = dfRecent, aes(x = as.integer(id), y = Error))+
   geom_col()+
-  geom_label(aes(label = as.integer(abs(dfRecent$Real-dfRecent$Prediction))),vjust = -0.2, fontface = "bold", show.legend = FALSE)+
+  geom_label(aes(label = as.integer(abs(dfRecent$Real-dfRecent$Prediction))),vjust = -0.4, fontface = "bold", show.legend = FALSE, size = 3)+
   xlab("Days")+
-  ylab("Relative Error in past 5 days")+
+  ylab("Relative Error in past 7 days")+
   theme_minimal()+
   scale_y_continuous(limits = c(0,max(dfRecent$Error)+0.003), expand = c(0,0),labels = scales::percent)
 plotE1
-sum(dfRecent$Error)
 ggsave("prediction/Error.png", scale = 3, width = 5, height = 5, units = "cm", dpi = "retina")
 
 
