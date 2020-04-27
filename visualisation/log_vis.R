@@ -46,9 +46,9 @@ ggplot(data = dfUK, aes(x = dfUK$confirmed, y = dfUK$newConfirmed, color = "UK")
   #geom_line(size = 0.8, lineend = "round")+
   #geom_line(data = dfChina_m, aes(x = China, y=china_new, color = "China"))+
   #geom_line(data = dfKorea_s, aes(x = KoreaS, y=KoreaS_new, color = "KoreaS"))+
-  geom_line(data = dfEUData, aes(x = Italy, y=Italy_new, color = "Italy"))+
-  geom_line(data = dfEUData, aes(x = Spain, y=Spain_new, color = "Spain"))+
-  geom_line(data = dfEUData, aes(x = Germany, y=Germany_new, color = "Germany"))+
+  geom_line(data = dfEUData, aes(x = Italy, y=Italy_new, color = "Italy"), alpha = 0.6)+
+  geom_line(data = dfEUData, aes(x = Spain, y=Spain_new, color = "Spain"), alpha = 0.6)+
+  geom_line(data = dfEUData, aes(x = Germany, y=Germany_new, color = "Germany"), alpha = 0.6)+
   #geom_point(data = dfUK[c(nrow(dfUK)),c(1:length(dfUK))], aes(x = confirmed, y = newConfirmed), size = 2, alpha = 0.4)+
   #stat_smooth(geom='line', alpha=0.6, se=FALSE, size = 1.5)+
   geom_abline(aes(slope = 1, intercept = 0, color = "Unlimited growth"), show.legend = T, size = 2)+

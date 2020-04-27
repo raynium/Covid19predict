@@ -13,12 +13,12 @@ dfUK = dfUK[c(1:nrow(dfUK)), c(1,3,4,15,16)]
 
 gridSearch = list(c(i=0,j=0,k=0,sum = 0))
 cnt = 1
-for (i in 2:4){
-  for (j in 2:4){
-    for (k in 1:6){
+for (i in 0:6){
+  for (j in 0:6){
+    for (k in 0:6){
       arima.order = c(i, j, k)
       #print(c(i,j,k))
-      UK.arima.recent = arima(dfUK$confirmed[1:(nrow(dfUK)-7)], order = arima.order)
+      try((UK.arima.recent = arima(dfUK$confirmed[1:(nrow(dfUK)-7)], order = arima.order)),T)
       pred.recent<-predict(UK.arima.recent, n.ahead=7)
       pred.recent = as.data.frame(pred.recent)
       
