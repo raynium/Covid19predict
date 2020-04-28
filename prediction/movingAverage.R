@@ -96,13 +96,14 @@ pred.Recent$newConfirmedPred = as.integer(pred.Recent$newConfirmedPred)
 plotC1 = ggplot(data = pred.Recent, aes(x = day, y = Confirmed))+
   geom_col(size = 0,aes(x=day, y= Prediction, fill = "Prediction"),alpha = 0.9)+
   geom_col(size = 0,aes(fill = "Confirmed"), alpha = 0.8)+
-  geom_label(aes(label = Confirmed, fill = "Confirmed"),vjust = -0.2, colour = "white", show.legend = FALSE,size = 3)+
+  geom_label(aes(label = Confirmed, fill = "Confirmed"),vjust = -0.2, colour = "white", show.legend = FALSE,size = 3, alpha = 0.8)+
   geom_label(aes(label = c(rep(NA,6),pred.Recent$Prediction[7:16]),x=pred.Recent$day, y=pred.Recent$Prediction,fill = "Prediction"),vjust = -0.2, colour = "white", show.legend = FALSE,size = 3)+
   annotate("text", label = "TODAY", x = days, y = 5000, size = 3, colour = "white",fontface = "bold", show.legend = FALSE)+
   xlab("Day")+
   ylab("Total Confirmed")+
   theme_minimal()+
   labs(fill = "",color = "")+
+  theme(legend.position="bottom")+
   scale_y_continuous(limits = c(0,max(pred$Prediction, na.rm = T)+20000), expand = c(0, 2000))
 plotC1
 ggsave("prediction/Bar.png", scale = 2.5, width = 10, height = 4, units = "cm", dpi = "retina")
@@ -110,12 +111,13 @@ ggsave("prediction/Bar.png", scale = 2.5, width = 10, height = 4, units = "cm", 
 plotC2 = ggplot(data = pred.Recent, aes(x = day, y = newConfirmed))+
   geom_col(size = 0,aes(x=day, y= newConfirmedPred, fill = "Prediction"),alpha = 0.9)+
   geom_col(size = 0,aes(fill = "Daily Confirmed"), alpha = 0.8)+
-  geom_label(aes(label = newConfirmed, fill = "Daily Confirmed"),vjust = -0.2, colour = "white", show.legend = FALSE,size = 3)+
+  geom_label(aes(label = newConfirmed, fill = "Daily Confirmed"),vjust = -0.2, colour = "white", show.legend = FALSE,size = 3, alpha = 0.8)+
   geom_label(aes(label = c(rep(NA,6),pred.Recent$newConfirmedPred[7:16]),x=pred.Recent$day, y=pred.Recent$newConfirmedPred,fill = "Prediction"),vjust = -0.2, colour = "white", show.legend = FALSE,size = 3)+
   annotate("text", label = "TODAY", x = days, y = 5000, size = 3, colour = "white",fontface = "bold", show.legend = FALSE)+
   xlab("Day")+
   ylab("Daily increase")+
   theme_minimal()+
+  theme(legend.position="bottom")+
   labs(fill = "",color = "")+
   scale_y_continuous(limits = c(0,max(pred$newConfirmedPred, na.rm = T)+1000), expand = c(0, 0))
 plotC2
