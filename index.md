@@ -5,28 +5,31 @@
 
 | Confirmed| Death| Cured| Serious| England| Scotland| Wales| N.Ireland|
 |---------:|-----:|-----:|-------:|-------:|--------:|-----:|---------:|
-|    152840| 20732|     0|       0|  110203|    10324|  9078|      3308|
-
-![daily figure](plot/DailyIncrease.png)
+|    161145| 21678|     0|       0|  114456|    10721|  9512|      3408|
 
 # ARIMA Prediction
+## Total confirmed
 
 ![amari figure](prediction/compare.png)
 ![amari compare figure](prediction/Bar.png)
 
+## Daily increase
+![amari compare figure](prediction/DailyBar.png)
 ## Log trend and elbow point
 ![uk figure](prediction/UKlogTrend.png)
 
-Compare trend with success case (🇨🇳, 🇰🇷) and EU countries:
 
-- [Log trend comparison](./trendFigures.html)
+## [Log trend comparison](./trendFigures.html)
+- Compare trend with success case (🇨🇳, 🇰🇷) and EU countries
+
 
 More about axis and interpretation of Log trend: 
 
 - [How To Tell If We're Beating COVID-19](https://youtu.be/54XLXg4fYsc)
 
 # Current
-
+## New cases
+![daily figure](plot/DailyIncrease.png)
 ## New death 
 ![death](plot/DeathIncrease.png)
 
