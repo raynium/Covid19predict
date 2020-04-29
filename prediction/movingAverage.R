@@ -22,10 +22,11 @@ UK.autoARIMA = auto.arima(dfUK$confirmed,
                           approximation = T,trace = T)
 UK.autoARIMA
 
-plotT1 = ggplot2::autoplot(forecast(UK.autoARIMA,20))+
+plotT1 = ggplot2::autoplot(forecast(UK.autoARIMA,20),color = "red")+
   xlab("Days")+
   ylab("Total Confirmed")+
   theme_minimal()+
+  geom_point(data = dfUK[days,], aes(x = id+0.5, y = confirmed+ 0.4*newConfirmed), size = 4, alpha = 0.3, color = 'blue')+
   scale_x_continuous(limits = c(30,NA))+
   theme(legend.position="bottom")
 plotT1
@@ -127,19 +128,19 @@ ggsave("prediction/DailyBar.png", scale = 2.5, width = 10, height = 4, units = "
 
 # Compare last days
 
-dfUK = read.csv("data/UK_data.csv", header = T)
-dfUK = dfUK[c(1:nrow(dfUK)), c(1,3,4,15,16)]
-arima.order = c(bestGrid$i, bestGrid$j, bestGrid$k)
-UK.arima.recent = arima(dfUK$confirmed[1:(nrow(dfUK)-7)], order = arima.order)
-pred.recent<-predict(UK.arima.recent, n.ahead=7)
-pred.recent = as.data.frame(pred.recent)
-
-dfRecent = as.data.frame( dfUK$confirmed[(nrow(dfUK)-6):nrow(dfUK)])
-dfRecent$Prediction = pred.recent$pred
-colnames(dfRecent) = c("Real","Prediction")
-dfRecent$id = dfUK$id[(nrow(dfUK)-6):nrow(dfUK)]
-dfRecent$Error = abs(dfRecent$Real-dfRecent$Prediction)/(dfRecent$Real)
-sum(dfRecent$Error)
+# dfUK = read.csv("data/UK_data.csv", header = T)
+# dfUK = dfUK[c(1:nrow(dfUK)), c(1,3,4,15,16)]
+# arima.order = c(bestGrid$i, bestGrid$j, bestGrid$k)
+# UK.arima.recent = arima(dfUK$confirmed[1:(nrow(dfUK)-7)], order = arima.order)
+# pred.recent<-predict(UK.arima.recent, n.ahead=7)
+# pred.recent = as.data.frame(pred.recent)
+# 
+# dfRecent = as.data.frame( dfUK$confirmed[(nrow(dfUK)-6):nrow(dfUK)])
+# dfRecent$Prediction = pred.recent$pred
+# colnames(dfRecent) = c("Real","Prediction")
+# dfRecent$id = dfUK$id[(nrow(dfUK)-6):nrow(dfUK)]
+# dfRecent$Error = abs(dfRecent$Real-dfRecent$Prediction)/(dfRecent$Real)
+# sum(dfRecent$Error)
 
 plotE1 = ggplot(data = pred[c((days-7):days),], aes(x = as.integer(pred$day[(days-7):days]), y =  tmp[["model"]][["residuals"]][(days-7):days]))+
   geom_col()+

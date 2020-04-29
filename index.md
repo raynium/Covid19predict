@@ -5,7 +5,7 @@
 
 | Confirmed| Death| Cured| Serious| England| Scotland| Wales| N.Ireland|
 |---------:|-----:|-----:|-------:|-------:|--------:|-----:|---------:|
-|    161145| 21678|     0|       0|  114456|    10721|  9512|      3408|
+|    165221| 26097|     0|       0|  114456|    10721|  9512|      3408|
 
 # ARIMA Prediction
 ## Total confirmed
@@ -30,9 +30,11 @@ More about axis and interpretation of Log trend:
 # Current
 ## New cases
 ![daily figure](plot/DailyIncrease.png)
-## New death 
+## New death
 ![death](plot/DeathIncrease.png)
 
+Notes on 29 April increase:
+- [UK deaths pass 26,000 as figures include care home cases](https://www.bbc.co.uk/news/uk-52478085)
 ## UK and EU Log trend
 ![UK trend](plot/UKlogTrend.png)
 
