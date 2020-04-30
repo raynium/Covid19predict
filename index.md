@@ -5,7 +5,7 @@
 
 | Confirmed| Death| Cured| Serious| England| Scotland| Wales| N.Ireland|
 |---------:|-----:|-----:|-------:|-------:|--------:|-----:|---------:|
-|    165221| 26097|     0|       0|  114456|    10721|  9512|      3408|
+|    171253| 26771|     0|       0|  118343|    11353|  9812|      3536|
 
 # ARIMA Prediction
 ## Total confirmed
