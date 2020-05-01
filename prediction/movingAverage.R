@@ -6,7 +6,8 @@ library(reshape2)
 library(data.table)
 library(ggpubr)
 library(forecast)
-
+library(parallel)
+library(doParallel)
 
 # Compare last 7 days
 dfUK = read.csv("data/UK_data.csv", header = T)
@@ -16,10 +17,11 @@ days = nrow(dfUK)
 
 
 UK.autoARIMA = auto.arima(dfUK$confirmed, 
-                          max.p = 21, max.q = 21, start.q = 1, max.d = 4, max.order = 42, 
+                          max.p = 21, max.q = 8, start.q = 1, max.d = 4, max.order = 42, 
                           seasonal = F,stepwise = F, 
-                          #parallel = T, num.cores = 8, 
-                          approximation = T,trace = T)
+                          #parallel = T, num.cores = NULL, 
+                          ic= "aic",
+                          approximation = F,trace = T)
 UK.autoARIMA
 
 plotT1 = ggplot2::autoplot(forecast(UK.autoARIMA,20),color = "red")+
