@@ -3,9 +3,7 @@
 
 # Cases
 
-| Confirmed| Death| Cured| Serious| England| Scotland| Wales| N.Ireland|
-|---------:|-----:|-----:|-------:|-------:|--------:|-----:|---------:|
-|    171253| 26771|     0|       0|  118343|    11353|  9812|      3536|
+![case](plot/CurrentStat.png)
 
 # ARIMA Prediction
 ## Total confirmed
