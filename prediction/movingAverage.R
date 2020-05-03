@@ -116,7 +116,7 @@ plotC2 = ggplot(data = pred.Recent, aes(x = day, y = newConfirmed))+
   geom_col(size = 0,aes(fill = "Daily Confirmed"), alpha = 0.8)+
   geom_label(aes(label = newConfirmed, fill = "Daily Confirmed"),vjust = -0.2, colour = "white", show.legend = FALSE,size = 3, alpha = 0.8)+
   geom_label(aes(label = c(rep(NA,6),pred.Recent$newConfirmedPred[7:16]),x=pred.Recent$day, y=pred.Recent$newConfirmedPred,fill = "Prediction"),vjust = -0.2, colour = "white", show.legend = FALSE,size = 3)+
-  annotate("text", label = "TODAY", x = days, y = 5000, size = 3, colour = "white",fontface = "bold", show.legend = FALSE)+
+  annotate("text", label = "TODAY", x = days, y = 1000, size = 3, colour = "white",fontface = "bold", show.legend = FALSE)+
   xlab("Day")+
   ylab("Daily increase")+
   theme_minimal()+

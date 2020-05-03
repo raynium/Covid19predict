@@ -54,17 +54,18 @@ json_file = "https://api.covid19uk.live/"
 readData =  fromJSON(paste(readLines(json_file), collapse="", simplify=TRUE))
 dfCurrent = readData[["data"]][[1]]
 dfCurrent = as.data.frame(dfCurrent[5:16])
-dfCurrent = dfCurrent[c(1:4,9:12)]
-colnames(dfCurrent) = c("Confirmed", "Death", "Cured", "Serious", "England", "Scotland", "Wales", "N.Ireland")
+dfCurrent = dfCurrent[c(1:2,8:12)]
+colnames(dfCurrent) = c("Confirmed", "Death", "Tested", "England", "Scotland", "Wales", "N.Ireland")
 
 knitr::kable(head(dfCurrent))
 
 library(formattable)
-ftCurrent = formattable(dfCurrent)
+row.names(ftCurrent) = NULL
+ftCurrent = formattable(dfCurrent,row.names = F)
 library("htmltools")
 library("webshot")
 
-export_formattable <- function(f, file, width = "100%", height = NULL, 
+export_formattable <- function(f, file, width = "80%", height = NULL, 
                                background = "white", delay = 0.2)
 {
   w <- as.htmlwidget(f, width = width, height = height)
