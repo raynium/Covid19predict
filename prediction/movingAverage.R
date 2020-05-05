@@ -150,7 +150,7 @@ plotE1 = ggplot(data = pred[c((days-7):days),], aes(x = as.integer(pred$day[(day
   xlab("Days")+
   ylab("Residual in past 7 days")+
   theme_minimal()+
-  ylim(-1000,1000)
+  ylim(-1500,1500)
 plotE1
 ggsave("prediction/Error.png", scale = 3, width = 5, height = 5, units = "cm", dpi = "retina")
 
