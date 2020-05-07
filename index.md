@@ -8,7 +8,7 @@
 # ARIMA Prediction
 ## Total confirmed
 
-![amari figure](prediction/compare.png)
+![amari figure](prediction/Compare.png)
 ![amari compare figure](prediction/Bar.png)
 
 ## Daily increase
