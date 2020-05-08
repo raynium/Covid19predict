@@ -1,7 +1,7 @@
 # setwd("Covid19predict")
 library(ggplot2)
 library(scales)
-library(reshape2)
+#library(reshape2)
 library(data.table)
 
 # Read UK data
@@ -14,7 +14,7 @@ dfEUData = read.csv("data/EU_confirmed.csv")
 dfChina_m = read.csv("data/China_m.csv", header = T)
 dfKorea_s = read.csv("data/korea_s.csv", header = T)
 
-# Remove abnomal point
+# Remove abnormal point
 dfEUData = dfEUData[-c(47),]
 
 # Plot log trend compare

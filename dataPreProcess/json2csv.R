@@ -3,7 +3,7 @@
 library(rjson)
 library (plyr)
 library(data.table)
-library(reshape2) # library for reshaping data (tall-narrow <-> short-wide)
+#library(reshape2) # library for reshaping data (tall-narrow <-> short-wide)
 json_file = "https://api.covid19uk.live/historyfigures"
 readData =  fromJSON(paste(readLines(json_file), collapse="", simplify=TRUE))
 
@@ -26,6 +26,7 @@ dfData$newDeath = 0
 for (item in 2:nrow(dfData)) {
   dfData$newDeath[item] = dfData$death[item] - dfData$death[item-1]
 }
+dfData$hospitalArea = NULL
 write.csv(dfData, file = "data/UK_data.csv", row.names = F, quote = F)
 
 
@@ -52,15 +53,15 @@ write.csv(dfEUData, file = "data/EU_confirmed.csv", row.names = F, quote = F)
 json_file = "https://api.covid19uk.live/"
 readData =  fromJSON(paste(readLines(json_file), collapse="", simplify=TRUE))
 dfCurrent = readData[["data"]][[1]]
-dfCurrent = as.data.frame(dfCurrent[5:16])
-dfCurrent = dfCurrent[c(1:2,8:12)]
-colnames(dfCurrent) = c("Confirmed", "Death", "Tested", "England", "Scotland", "Wales", "N.Ireland")
+dfCurrent = as.data.frame(dfCurrent[5:18])
+dfCurrent = dfCurrent[c(1:2,8:12,14)]
+colnames(dfCurrent) = c("Confirmed", "Death", "Tested", "England", "Scotland", "Wales", "N.Ireland", "In hospital")
 
 knitr::kable(head(dfCurrent))
 
 library(formattable)
 row.names(ftCurrent) = NULL
-ftCurrent = formattable(dfCurrent,row.names = F)
+ftCurrent <- formattable(dfCurrent,row.names = F)
 library("htmltools")
 library("webshot")
 
