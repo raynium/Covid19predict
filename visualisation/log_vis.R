@@ -15,7 +15,7 @@ dfChina_m = read.csv("data/China_m.csv", header = T)
 dfKorea_s = read.csv("data/korea_s.csv", header = T)
 
 # Remove abnormal point
-dfEUData = dfEUData[-c(47),]
+dfEUData = dfEUData[-c(47,97),]
 
 # Plot log trend compare
 

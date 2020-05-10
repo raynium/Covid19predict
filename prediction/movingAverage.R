@@ -11,7 +11,7 @@ library(doParallel)
 
 # Compare last 7 days
 dfUK = read.csv("data/UK_data.csv", header = T)
-dfUK = dfUK[c(1:nrow(dfUK)), c(1,3,4,15,16)]
+dfUK = dfUK[c(1:nrow(dfUK)), c(1,3,4,17,18)]
 days = nrow(dfUK)
 
 
@@ -20,9 +20,16 @@ UK.autoARIMA = auto.arima(dfUK$confirmed,
                           max.p = 21, max.q = 8, start.q = 1, max.d = 4, max.order = 42, 
                           seasonal = F,stepwise = F, 
                           #parallel = T, num.cores = NULL, 
-                          ic= "aic",
+                          ic= "aicc",
                           approximation = F,trace = T)
 UK.autoARIMA
+
+line=toString(c(UK.autoARIMA[["arma"]][1], UK.autoARIMA[["arma"]][2], round(UK.autoARIMA[["loglik"]],2), round(UK.autoARIMA[["aic"]],2)))
+write(line,file="prediction/log.csv",append=TRUE)
+
+dfLOG = read.csv("prediction/log.csv",header = T)
+ftLog <- formattable(dfLOG)
+export_formattable(ftLog,"prediction/log.png")
 
 plotT1 = ggplot2::autoplot(forecast(UK.autoARIMA,20),color = "red")+
   xlab("Days")+
@@ -152,10 +159,10 @@ plotE1 = ggplot(data = pred[c((days-7):days),], aes(x = as.integer(pred$day[(day
   theme_minimal()+
   ylim(-5000,5000)
 plotE1
-ggsave("prediction/Error.png", scale = 3, width = 5, height = 5, units = "cm", dpi = "retina")
+ggsave("prediction/Error.png", scale = 3, width = 8, height = 5, units = "cm", dpi = "retina")
 
 
-ggarrange(plotT1,plotE1, widths = c(0.8,0.4))
+#ggarrange(plotT1,plotE1, widths = c(0.8,0.4))
 
-ggsave("prediction/Compare.png", scale = 2.5, width = 10, height = 4, units = "cm", dpi = "retina")
+#ggsave("prediction/Compare.png", scale = 2.5, width = 10, height = 4, units = "cm", dpi = "retina")
 

@@ -60,7 +60,7 @@ colnames(dfCurrent) = c("Confirmed", "Death", "Tested", "England", "Scotland", "
 knitr::kable(head(dfCurrent))
 
 library(formattable)
-row.names(ftCurrent) = NULL
+row.names(dfCurrent) = NULL
 ftCurrent <- formattable(dfCurrent,row.names = F)
 library("htmltools")
 library("webshot")

@@ -6,15 +6,12 @@
 ![case](plot/CurrentStat.png)
 
 # ARIMA Prediction
-## Total confirmed
-
 ![amari figure](prediction/ARIMAtotal.png)
-![amari compare figure](prediction/Bar.png)
-![arror figure](prediction/Error.png)
 
-## Daily increase
-![amari compare figure](prediction/DailyBar.png)
-## Log trend and elbow point
+## [Prediction details](./predictionFigures.html)
+
+
+## Log trend
 ![uk figure](prediction/UKlogTrend.png)
 
 
@@ -24,18 +21,21 @@
 
 More about axis and interpretation of Log trend: 
 
-- [How To Tell If We're Beating COVID-19](https://youtu.be/54XLXg4fYsc)
+- [How To Tell If We're Beating COVID-19 (Youtube)](https://youtu.be/54XLXg4fYsc)
 
 # Current
+
+## UK and EU Log trend
+![UK trend](plot/UKlogTrend.png)
+
 ## New cases
 ![daily figure](plot/DailyIncrease.png)
+
 ## New death
 ![death](plot/DeathIncrease.png)
 
 Notes on 29 April increase:
 - [UK deaths pass 26,000 as figures include care home cases](https://www.bbc.co.uk/news/uk-52478085)
-## UK and EU Log trend
-![UK trend](plot/UKlogTrend.png)
 
 Data Sources: 
 - [JHU CSSE Data Repository](https://github.com/CSSEGISandData/COVID-19)
