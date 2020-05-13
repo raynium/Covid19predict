@@ -22,7 +22,7 @@ days = nrow(dfUK)
 #                           #parallel = T, num.cores = NULL, 
 #                           ic= "aicc",
 #                           approximation = F,trace = T)
-UK.autoARIMA
+#UK.autoARIMA
 UK.arima = arima(dfUK$confirmed, order = c(14,2,7))
 UK.arima2 = arima(dfUK$confirmed, order = c(7,2,7))
 
@@ -30,22 +30,22 @@ if(UK.arima[["loglik"]]<UK.arima2[["loglik"]]){
   UK.arima  = UK.arima2
 }
   
-line=toString(c(UK.arima[["arma"]][1], UK.autoARIMA[["arma"]][2], round(UK.arima[["loglik"]],2), round(UK.arima[["aic"]],2)))
+line=toString(c(UK.arima[["arma"]][1], UK.arima[["arma"]][2], round(UK.arima[["loglik"]],2), round(UK.arima[["aic"]],2)))
 write(line,file="prediction/log.csv",append=TRUE)
 
 dfLOG = read.csv("prediction/log.csv",header = T)
 ftLog <- formattable(dfLOG)
 export_formattable(ftLog,"prediction/log.png")
 
-plotT1 = ggplot2::autoplot(forecast(UK.autoARIMA,20),color = "red")+
-  xlab("Days")+
-  ylab("Total Confirmed")+
-  theme_minimal()+
-  geom_point(data = dfUK[days,], aes(x = id+0.5, y = confirmed+ 0.4*newConfirmed), size = 4, alpha = 0.3, color = 'blue')+
-  scale_x_continuous(limits = c(30,NA))+
-  theme(legend.position="bottom")
-plotT1
-ggsave("prediction/ARIMAtotal.png", scale = 2.5, width = 8, height = 4, units = "cm", dpi = "retina")
+# plotT1 = ggplot2::autoplot(forecast(UK.autoARIMA,20),color = "red")+
+#   xlab("Days")+
+#   ylab("Total Confirmed")+
+#   theme_minimal()+
+#   geom_point(data = dfUK[days,], aes(x = id+0.5, y = confirmed+ 0.4*newConfirmed), size = 4, alpha = 0.3, color = 'blue')+
+#   scale_x_continuous(limits = c(30,NA))+
+#   theme(legend.position="bottom")
+# plotT1
+# ggsave("prediction/ARIMAtotal.png", scale = 2.5, width = 8, height = 4, units = "cm", dpi = "retina")
 
 plotT2 = ggplot2::autoplot(forecast(UK.arima,20),color = "red")+
   xlab("Days")+
@@ -57,13 +57,13 @@ plotT2 = ggplot2::autoplot(forecast(UK.arima,20),color = "red")+
 plotT2
 ggsave("prediction/ARIMAtotal.png", scale = 2.5, width = 8, height = 4, units = "cm", dpi = "retina")
 
-tsdiag(UK.autoARIMA)
+#tsdiag(UK.autoARIMA)
 tsdiag(UK.arima)
 #tmp = forecast(UK.autoARIMA,20)
 tmp = forecast(UK.arima,20)
 pred = c(tmp[["fitted"]],tmp[["mean"]])
 pred = as.data.frame(pred)
-pred$UK = c(forecast(UK.autoARIMA,20)[["x"]],rep(NA,20))
+pred$UK = c(forecast(UK.arima,20)[["x"]],rep(NA,20))
 
 colnames(pred) = c("Prediction","Confirmed")
 pred$newConfirmedPred = 0
