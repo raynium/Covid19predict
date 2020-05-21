@@ -24,8 +24,8 @@ days = nrow(dfUK)
 #                           approximation = F,trace = T)
 #UK.autoARIMA
 UK.arima = arima(dfUK$confirmed, order = c(7,2,7))
-#UK.arima2 = arima(dfUK$confirmed, order = c(14,2,7))
-UK.arima2 = UK.arima
+UK.arima2 = arima(dfUK$confirmed, order = c(14,2,7))
+# UK.arima2 = UK.arima
 
 if(UK.arima[["loglik"]]<UK.arima2[["loglik"]]){
   UK.arima  = UK.arima2

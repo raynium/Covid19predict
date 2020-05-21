@@ -6,13 +6,11 @@
 ![case](plot/CurrentStat.png)
 
 # ARIMA Prediction
-![amari figure](prediction/ARIMAtotal.png)
+## Log trend
+![uk figure](prediction/UKlogTrend.png)
 
 ## [Prediction details](./predictionFigures.html)
 
-
-## Log trend
-![uk figure](prediction/UKlogTrend.png)
 
 
 ## [Log trend comparison](./trendFigures.html)
